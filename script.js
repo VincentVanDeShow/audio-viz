@@ -6,17 +6,20 @@ var analyser = audioCtx.createAnalyser();
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination);
 
-
+// This creates the giant array if you log the frequency data
 let frequencyData = new Uint8Array(200);
 
+// base values
 let svgHeight = '300';
 let svgWidth = '1000';
-let barPadding = '1';
+// set the padding of the bars
+let barPadding = '2';
 
 function createSvg(parent, height, width) {
   return d3.select(parent).append('svg').attr('height', height).attr('width', width);
 }
 
+// Create the SVG
 let svg = createSvg('body', svgHeight, svgWidth);
 
 // Create our initial D3 chart.
@@ -40,13 +43,17 @@ function renderChart() {
 
     // Update d3 chart with new data.
     svg.selectAll('rect')
+    // load RT audio data
        .data(frequencyData)
+    //    set y
        .attr('y', function(d) {
           return svgHeight - d;
        })
+    //    return height
        .attr('height', function(d) {
           return d;
        })
+    //    fill the bars
        .attr('fill', function(d) {
           return 'rgb(0,' + d +', ' + d + ')';
        });
