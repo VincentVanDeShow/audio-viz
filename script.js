@@ -3,6 +3,7 @@ var audioElement = document.getElementById('audioElement');
 var audioSrc = audioCtx.createMediaElementSource(audioElement);
 var analyser = audioCtx.createAnalyser();
 
+console.log(audioElement);
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination);
 
